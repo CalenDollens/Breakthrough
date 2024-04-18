@@ -1,4 +1,4 @@
-import pygame
+import pygame, asyncio
 # from pygame.locals import *
 import sys, os, math
 from miniMax_agent import *
@@ -71,7 +71,7 @@ class BreakthroughGame:
         self.total_step_2 = 0
         self.eat_piece = 0
         # Caption
-        pygame.display.set_caption("Breakthrough!")
+        pygame.display.set_caption("Breakthrough Galactic!")
 
         # initialize pygame clock
         self.clock = pygame.time.Clock()
@@ -404,7 +404,7 @@ class BreakthroughGame:
 
 ##### FUNCTION TO GET INFORMATION FROM THE ALPHA BETA AGENT #####
     def alpha_beta_eval(self, function_type):
-        board, nodes, piece = AlphaBetaAgent(self.boardmatrix, self.turn, 5, function_type).alpha_beta_decision()
+        board, nodes, piece = AlphaBetaAgent(self.boardmatrix, self.turn, 4, function_type).alpha_beta_decision()
         self.boardmatrix = board.get_board()
         if self.turn == 1:
             self.total_nodes_1 += nodes
@@ -417,13 +417,14 @@ class BreakthroughGame:
             self.player_state = 3
 
 
-def main():
+async def main():
     game = BreakthroughGame()
     while 1:
         game.run()
-
+        await asyncio.sleep(0)
 
 if __name__ == '__main__':
     main()
 
+asyncio.run(main())
 
